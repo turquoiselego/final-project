@@ -1,0 +1,63 @@
+class RecipeFinder:
+    def __init__(self):
+        self.recipe_db = {
+            "Scrambled Eggs": {
+                "ingredients": ["eggs", "butter", "salt"],
+                "instructions": "Beat eggs with salt. Melt butter in a pan. Cook eggs until scrambled."
+            },
+            "Fried Rice": {
+                "ingredients": ["rice", "egg", "soy sauce", "vegetable oil"],
+                "instructions": "Cook rice and set aside. Scramble an egg, mix with rice, soy sauce, and vegetable oil."
+            },
+            "Beef Stir Fry": {
+                "ingredients": ["beef", "soy sauce", "garlic", "vegetable oil"],
+                "instructions": "Sauté beef with garlic in vegetable oil. Add soy sauce and cook until tender."
+            },
+            "Egg Salad": {
+                "ingredients": ["eggs", "mayonnaise", "mustard", "salt", "pepper"],
+                "instructions": "Boil eggs, chop, and mix with mayonnaise, mustard, salt, and pepper."
+            },
+            "Rice and Beans": {
+                "ingredients": ["rice", "black beans", "salt", "olive oil"],
+                "instructions": "Cook rice. Heat beans with salt and olive oil. Serve together."
+            },
+            "Beef Tacos": {
+                "ingredients": ["ground beef", "taco seasoning", "tortillas"],
+                "instructions": "Cook ground beef with taco seasoning. Serve in tortillas."
+            },
+            "Omelette": {
+                "ingredients": ["eggs", "butter", "cheese", "salt"],
+                "instructions": "Beat eggs with salt. Cook in butter, add cheese, fold, and serve."
+            },
+            "Garlic Butter Rice": {
+                "ingredients": ["rice", "butter", "garlic"],
+                "instructions": "Cook rice. Sauté garlic in butter, mix with rice, and serve."
+            },
+            "Beef Patties": {
+                "ingredients": ["ground beef", "salt", "pepper"],
+                "instructions": "Season ground beef with salt and pepper. Shape into patties and cook in a pan."
+            }
+        }
+
+    def find_recipes(self, available_ingredients):
+        possible_recipes = []
+        for recipe, details in self.recipe_db.items():
+            if set(details["ingredients"]).issubset(set(available_ingredients)):
+                possible_recipes.append((recipe, details["instructions"]))
+        return possible_recipes
+
+
+# Example usage
+recipe_finder = RecipeFinder()
+
+# User inputs available ingredients
+available_ingredients_input = input("Enter the ingredients you have (comma separated): ")
+available_ingredients = [ingredient.strip().lower() for ingredient in available_ingredients_input.split(",")]
+
+# Find recipes
+recipes = recipe_finder.find_recipes(available_ingredients)
+if recipes:
+    for recipe, instructions in recipes:
+        print(f"Recipe: {recipe}\nInstructions: {instructions}\n")
+else:
+    print("No recipes found with the available ingredients.")
